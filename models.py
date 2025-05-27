@@ -23,7 +23,7 @@ class Product(Base):
     price = Column(Float)
     amount = Column(Integer)
     description = Column(String(100))
-    users = relationship("User ", secondary="user_basket", back_populates="basket")
+    users = relationship("User", secondary="user_basket", back_populates="basket")
     shops = relationship("Shop", secondary="shop_products", back_populates="products")
 
 
