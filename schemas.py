@@ -2,24 +2,28 @@ from typing import List
 
 from pydantic import BaseModel, constr
 
-from models import Product
-
 
 class UserBase(BaseModel):
-    """Схема валидации для пользователя"""
+    """Валидация для пользователя"""
     id: int
     name: str
     email: str
-    # basket: List['Product'] = []
+    basket: List['ProductBase'] = []
 
 
 class UserBaseList(BaseModel):
-    """Схема валидации для списка пользователей"""
+    """Валидация для списка пользователей"""
     users: list[UserBase]
 
 
+class UserCreate(BaseModel):
+    """Валидация для добавления пользователя"""
+    name: str
+    email: str
+
+
 class ProductBase(BaseModel):
-    """Схема валидации для продукта"""
+    """Валидация для продукта"""
     class Config:
         arbitrary_types_allowed = True
     id: int
@@ -31,15 +35,14 @@ class ProductBase(BaseModel):
     # shops = relationship("Shop", secondary=shop_products, back_populates="products")
 
 
-class UserCreate(BaseModel):
-    name: str
-    email: str
+class ProductBaseList(BaseModel):
+    """Валидация для списка продуктов"""
+    products: list[ProductBase]
 
 
-
-# class User(UserBase):
-#     id: int
-#     basket: List['Product'] = []
-#
-#     class Config:
-#         orm_mode = True
+class ProductCreate(BaseModel):
+    """Валидация для добавления продукта"""
+    title: str
+    price: float
+    amount: int
+    description: constr(max_length=100)

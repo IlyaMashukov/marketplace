@@ -1,10 +1,11 @@
 import uvicorn
 from fastapi import FastAPI
 
-from vews import router
+from vews import router, prod_router
 
 app = FastAPI()
 app.include_router(router, tags=['users'])
+app.include_router(prod_router, tags=['products'])
 
 
 if __name__ == "__main__":
