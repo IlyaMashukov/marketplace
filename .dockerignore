@@ -1,0 +1,12 @@
+*.pyc
+__pycache__/
+venv/
+*.log
+*.key
+*.credentials
+tmp/
+temp/
+docker-compose.yml
+docker-compose.override.yml
+.git/
+.env
