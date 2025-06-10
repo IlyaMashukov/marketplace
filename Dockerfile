@@ -1,9 +1,13 @@
 FROM python:3.13
 
-RUN mkdir -p /marketplace
+RUN pip install poetry
+
 WORKDIR /marketplace
 
+COPY pyproject.toml poetry.lock /marketplace/
+
+RUN poetry install --no-root
+
 COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ["python", "main.py"]
