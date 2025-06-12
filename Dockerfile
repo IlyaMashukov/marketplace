@@ -8,6 +8,6 @@ COPY pyproject.toml poetry.lock /marketplace/
 
 RUN poetry install --no-root
 
-COPY . .
+COPY . /marketplace
 
-CMD ["python", "main.py"]
+CMD ["poetry", "run", "uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
